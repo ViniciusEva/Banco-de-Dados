@@ -21,6 +21,7 @@ Os comandos iniciais preparam o servidor para receber as estruturas:
 * `USE`: Define o contexto de execução para o banco específico.
 
 ### 2. Tabelas e Restrições
+
 As tabelas são definidas com restrições (Constraints) para garantir que os dados sejam confiáveis:
 * **PRIMARY KEY (PK)**: Identificador único de cada registro. Impede duplicidade de linhas.
 * **AUTO_INCREMENT**: Recurso do sistema para gerar IDs sequenciais automaticamente.
