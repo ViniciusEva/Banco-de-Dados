@@ -57,7 +57,46 @@ A arquitetura utiliza o conceito de tabelas de **Entidade** (dados mestres) e ta
 Para inserir e gerenciar informações:
 ```sql
 -- Inserção de dados
-INSERT INTO Tabela (coluna) VALUES ('valor');
+INSERT INTO Nome_Tabela (coluna1, coluna2) VALUES ('Valor1', 'Valor2');
+```
 
+### Alteração de Estrutura (DDL)
+Para modificar uma tabela já existente sem deletá-la:
+```sql
 -- Atualização (Exemplo conceitual)
-UPDATE Tabela SET coluna = 'novo_valor' WHERE id = 1;
+ALTER TABLE Nome_Tabela ADD CONSTRAINT Nome_Regra UNIQUE (coluna);
+```
+
+## 🖼️ Views (Visualizações)
+Foi implementada uma View para simplificar consultas complexas. A View salva um comando `SELECT` longo sob um nome amigável, permitindo que usuários consultem relatórios completos sem precisar escrever múltiplos Joins repetidamente.
+
+## 📐 Wireframe da Arquitetura (Esquema Lógico)
+Abaixo, uma representação visual de como as tabelas interagem entre si:
+
+```wireframe
++----------------+          +----------------+          +----------------+
+|     FILME      |          |     SALA       |          |    CLIENTE     |
++----------------+          +----------------+          +----------------+
+| id_filme (PK)  |          | id_sala (PK)   |          | id_cliente (PK)|
+| titulo         |          | nome           |          | nome           |
+| diretor        |          | capacidade     |          | cpf (Unique)   |
++-------+--------+          +-------+--------+          +-------+--------+
+        |                           |                           |
+        |      +----------------+   |                           |
+        +----->|     SESSAO     |<--+                           |
+               +----------------+                               |
+               | id_sessao (PK) |                               |
+               | fk_filme (FK)  |                               |
+               | fk_sala  (FK)  |                               |
+               | data_hora      |                               |
+               +-------+--------+                               |
+                       |                                        |
+                       |      +----------------+                |
+                       +----->|    INGRESSO    |<---------------+
+                              +----------------+
+                              | id_ingresso(PK)|
+                              | fk_sessao (FK) |
+                              | fk_cliente(FK) |
+                              | assento        |
+                              +----------------+
+```
